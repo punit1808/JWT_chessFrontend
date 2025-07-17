@@ -1,8 +1,9 @@
 // src/components/LoginButton.jsx
 import React from "react";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080"; // Adjust port if needed
 
 const LoginButton = () => {
-  const backendUrl = "http://chessbackend-production.up.railway.app/oauth2/authorization/google"; // Adjust port
+  const backendUrl = `${BACKEND_URL}/oauth2/authorization/google`; // Adjust port
 
   return (
     <a href={backendUrl}>

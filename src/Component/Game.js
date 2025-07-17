@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080"; // Adjust port if needed
+const BACK_URL = process.env.REACT_APP_BACK_URL || "localhost:8080"; // Adjust port if needed
+
 export default function Game() {
   const [gameId, setGameId] = useState("");
   const [playerId, setPlayerId] = useState("");
@@ -8,7 +11,7 @@ export default function Game() {
   const [msg, setMsg] = useState("");
 
   const createGame = async () => {
-    const res = await fetch("http://chessbackend-production.up.railway.app/api/game/create", { method: "POST" });
+    const res = await fetch(`${BACKEND_URL}/api/game/create`, { method: "POST" });
     const data = await res.json();
     setGameId(data.gameId);
     alert("Game ID: " + data.gameId);
@@ -17,7 +20,7 @@ export default function Game() {
   const joinGame = async () => {
 
 // Need to add a unique token for each user
-    const ws = new WebSocket(`ws://chessbackend-production.up.railway.app/ws/game/${gameId}/${playerId}/${playerId}`);
+    const ws = new WebSocket(`wss://${BACK_URL}/ws/game/${gameId}/${playerId}/${playerId}`);
     
     ws.onopen = () => {
       console.log(`Connected to game ${gameId} as player ${playerId}`);

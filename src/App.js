@@ -8,6 +8,7 @@ import LogoutButton from './components/LogoutButton';
 import Test from './components/Test';
 import axios from 'axios';
 // import User from './Component/User';
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080"; // Adjust port if needed
 
 const App=()=> {
 
@@ -18,11 +19,12 @@ const App=()=> {
   useEffect(() => {
     // Try to fetch token or protected endpoint using cookie
     axios
-      .get("http://chessbackend-production.up.railway.app/token", {
+      .get(`${BACKEND_URL}/token`, {
         withCredentials: true, // IMPORTANT for cookie to be sent
       })
       .then((res) => {
-        console.log("Authenticated as:", res.data.token);
+        // console.log("Authenticated as:", res.data.token);
+        console.log("Authenticated ");
         setAuthenticated(true);
         setOnLogin(true);
         navigate("/Start");

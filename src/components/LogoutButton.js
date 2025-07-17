@@ -1,13 +1,14 @@
 import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080"; // Adjust port if needed
 
 const LogoutButton = () => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://chessbackend-production.up.railway.app/logout", {}, {
+      await axios.post(`${BACKEND_URL}/logout`, {}, {
         withCredentials: true
       });
 

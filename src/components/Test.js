@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios"; // ✅ Make sure this is imported
 import LogoutButton from "../components/LogoutButton";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080"; // Adjust port if needed
 
 const Test = () => {
   const [msg, setMsg] = useState("");
 
   const handleClick = () => {
     axios
-      .get("http://chessbackend-production.up.railway.app/api/hello", {
+      .get(`${BACKEND_URL}/api/hello`, {
         withCredentials: true, // ✅ Sends the session cookie
       })
       .then((res) => {
