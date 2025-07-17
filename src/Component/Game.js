@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080"; // Adjust port if needed
-const BACK_URL = process.env.REACT_APP_BACK_URL || "localhost:8080"; // Adjust port if needed
+const BACK_URL = process.env.REACT_APP_BACK_URL || "ws://localhost:8080"; // Adjust port if needed
 
 export default function Game() {
   const [gameId, setGameId] = useState("");
@@ -20,7 +20,7 @@ export default function Game() {
   const joinGame = async () => {
 
 // Need to add a unique token for each user
-    const ws = new WebSocket(`wss://${BACK_URL}/ws/game/${gameId}/${playerId}/${playerId}`);
+    const ws = new WebSocket(`${BACK_URL}/ws/game/${gameId}/${playerId}/${playerId}`);
     
     ws.onopen = () => {
       console.log(`Connected to game ${gameId} as player ${playerId}`);

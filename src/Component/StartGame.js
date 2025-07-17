@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
 import Board from "./Board";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080"; // Adjust port if needed 
-const BACK_URL=process.env.REACT_APP_BACK_URL || "localhost:8080"; // Adjust port if needed
+const BACK_URL=process.env.REACT_APP_BACK_URL || "ws://localhost:8080"; // Adjust port if needed
 
 const StartGame = () => {
   const [user1, setUser1] = useState("");
@@ -41,7 +41,7 @@ const StartGame = () => {
     }
 
     try {
-      const ws = new WebSocket(`wss://${BACK_URL}/ws/game/${gameId}/${user1}/${user1}`);
+      const ws = new WebSocket(`${BACK_URL}/ws/game/${gameId}/${user1}/${user1}`);
       setSocket(ws);
     
       ws.onopen = () => {
